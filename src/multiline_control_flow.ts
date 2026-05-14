@@ -5,7 +5,7 @@
 // Disallowed:
 //   if (cond) return;
 //   while (cond) doThing();
-//   for (const x of xs) use(x);
+//   for (const item of array) use(item);
 //
 // Required:
 //   if (cond) {
