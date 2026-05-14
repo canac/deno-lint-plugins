@@ -1,11 +1,12 @@
 {
   "name": "@canac/deno-lint-plugins",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "exports": {
     ".": "./src/mod.ts",
     "./descriptive-names": "./src/descriptive_names.ts",
-    "./multiline-control-flow": "./src/multiline_control_flow.ts"
+    "./multiline-control-flow": "./src/multiline_control_flow.ts",
+    "./prefer-arrow-functions": "./src/prefer_arrow_functions.ts"
   },
   "publish": {
     "include": [
@@ -14,7 +15,8 @@
       "src/**/*.ts"
     ],
     "exclude": [
-      "*_test.ts"
+      "*_test.ts",
+      "src/test_helpers.ts"
     ]
   },
   "imports": {

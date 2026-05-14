@@ -1,4 +1,3 @@
-/// <reference lib="deno.unstable" />
 import { assertEquals } from "@std/assert";
 import plugin from "./descriptive_names.ts";
 

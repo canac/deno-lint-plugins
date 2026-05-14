@@ -1,25 +1,9 @@
-/// <reference lib="deno.unstable" />
 import { assertEquals } from "@std/assert";
 import plugin from "./multiline_control_flow.ts";
+import { applyFixes } from "./test_helpers.ts";
 
 function lint(source: string): Deno.lint.Diagnostic[] {
   return Deno.lint.runPlugin(plugin, "test.ts", source);
-}
-
-function applyFixes(
-  source: string,
-  diagnostics: Deno.lint.Diagnostic[],
-): string {
-  const fixes = diagnostics
-    .flatMap((diagnostic) => diagnostic.fix ?? [])
-    .toSorted((a, b) => b.range[0] - a.range[0]);
-
-  let result = source;
-  for (const fix of fixes) {
-    result = result.slice(0, fix.range[0]) + fix.text +
-      result.slice(fix.range[1]);
-  }
-  return result;
 }
 
 const MSG = "Control flow bodies must be on their own line";

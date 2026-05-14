@@ -36,6 +36,29 @@ if (done) {
 }
 ```
 
+### `style/prefer-arrow-functions`
+
+Disallows `function` declarations and expressions in favor of arrow functions.
+Auto-fixable. Skips generators, class/object methods, and getters/setters.
+
+```ts
+// Bad
+function add(a, b) {
+  return a + b;
+}
+const greet = function (name) {
+  return `hi, ${name}`;
+};
+
+// Good
+const add = (a, b) => {
+  return a + b;
+};
+const greet = (name) => {
+  return `hi, ${name}`;
+};
+```
+
 ## Usage
 
 Reference the plugins from your `deno.json` via JSR:
@@ -45,7 +68,8 @@ Reference the plugins from your `deno.json` via JSR:
   "lint": {
     "plugins": [
       "jsr:@canac/deno-lint-plugins/descriptive-names",
-      "jsr:@canac/deno-lint-plugins/multiline-control-flow"
+      "jsr:@canac/deno-lint-plugins/multiline-control-flow",
+      "jsr:@canac/deno-lint-plugins/prefer-arrow-functions"
     ]
   }
 }
