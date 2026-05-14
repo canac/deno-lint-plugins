@@ -1,4 +1,3 @@
-/// <reference lib="deno.unstable" />
 // Deno lint plugin that disallows single-line control-flow statements.
 // Applies to: if/else, while, do-while, for, for-in, for-of.
 //
@@ -12,7 +11,7 @@
 //     return;
 //   }
 
-const plugin = {
+const plugin: Deno.lint.Plugin = {
   name: "style",
   rules: {
     "multiline-control-flow": {
@@ -60,6 +59,6 @@ const plugin = {
       },
     },
   },
-} satisfies Deno.lint.Plugin;
+};
 
 export default plugin;

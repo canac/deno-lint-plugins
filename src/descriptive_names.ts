@@ -1,7 +1,6 @@
-/// <reference lib="deno.unstable" />
 // Deno lint plugin that disallows single-letter variable names.
 
-const plugin = {
+const plugin: Deno.lint.Plugin = {
   name: "names",
   rules: {
     "descriptive-names": {
@@ -76,6 +75,6 @@ const plugin = {
       },
     },
   },
-} satisfies Deno.lint.Plugin;
+};
 
 export default plugin;

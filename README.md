@@ -38,14 +38,14 @@ if (done) {
 
 ## Usage
 
-Reference the plugins from your `deno.json`:
+Reference the plugins from your `deno.json` via JSR:
 
 ```json
 {
   "lint": {
     "plugins": [
-      "./src/descriptive_names.ts",
-      "./src/multiline_control_flow.ts"
+      "jsr:@canac/deno-lint-plugins/descriptive-names",
+      "jsr:@canac/deno-lint-plugins/multiline-control-flow"
     ]
   }
 }
