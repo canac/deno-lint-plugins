@@ -25,6 +25,12 @@ const plugin = {
           context.report({
             node,
             message: "Control flow bodies must be on their own line",
+            fix(fixer) {
+              return [
+                fixer.insertTextBefore(body, "{ "),
+                fixer.insertTextAfter(body, " }"),
+              ];
+            },
           });
         }
 
