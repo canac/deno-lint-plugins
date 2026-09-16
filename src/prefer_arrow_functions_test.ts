@@ -19,7 +19,7 @@ Deno.test("flags function declaration", () => {
 Deno.test("fixes function declaration", () => {
   const source = "function add(a, b) { return a + b; }";
   assertEquals(
-    applyFixes(source, lint(source)),
+    applyFixes(source, lint),
     "const add = (a, b) => { return a + b; };",
   );
 });
@@ -27,7 +27,7 @@ Deno.test("fixes function declaration", () => {
 Deno.test("fixes async function declaration", () => {
   const source = "async function load() { return 1; }";
   assertEquals(
-    applyFixes(source, lint(source)),
+    applyFixes(source, lint),
     "const load = async () => { return 1; };",
   );
 });
@@ -35,7 +35,7 @@ Deno.test("fixes async function declaration", () => {
 Deno.test("fixes typed function declaration", () => {
   const source = "function id<T>(value: T): T { return value; }";
   assertEquals(
-    applyFixes(source, lint(source)),
+    applyFixes(source, lint),
     "const id = <T>(value: T): T => { return value; };",
   );
 });
@@ -43,7 +43,7 @@ Deno.test("fixes typed function declaration", () => {
 Deno.test("fixes function expression assigned to variable", () => {
   const source = "const f = function (a) { return a; };";
   assertEquals(
-    applyFixes(source, lint(source)),
+    applyFixes(source, lint),
     "const f = (a) => { return a; };",
   );
 });
@@ -51,7 +51,7 @@ Deno.test("fixes function expression assigned to variable", () => {
 Deno.test("fixes named function expression", () => {
   const source = "const f = function named(a) { return a; };";
   assertEquals(
-    applyFixes(source, lint(source)),
+    applyFixes(source, lint),
     "const f = (a) => { return a; };",
   );
 });
@@ -59,7 +59,7 @@ Deno.test("fixes named function expression", () => {
 Deno.test("fixes IIFE", () => {
   const source = "(function (x) { return x; })(1);";
   assertEquals(
-    applyFixes(source, lint(source)),
+    applyFixes(source, lint),
     "((x) => { return x; })(1);",
   );
 });
@@ -67,7 +67,7 @@ Deno.test("fixes IIFE", () => {
 Deno.test("fixes non-method object property function", () => {
   const source = "const obj = { run: function (x) { return x; } };";
   assertEquals(
-    applyFixes(source, lint(source)),
+    applyFixes(source, lint),
     "const obj = { run: (x) => { return x; } };",
   );
 });
@@ -103,7 +103,7 @@ Deno.test("skips export default named function", () => {
 Deno.test("flags exported named function declaration", () => {
   const source = "export function foo() { return 1; }";
   assertEquals(
-    applyFixes(source, lint(source)),
+    applyFixes(source, lint),
     "export const foo = () => { return 1; };",
   );
 });
@@ -111,7 +111,7 @@ Deno.test("flags exported named function declaration", () => {
 Deno.test("flags function passing through callback", () => {
   const source = "arr.map(function (x) { return x + 1; });";
   assertEquals(
-    applyFixes(source, lint(source)),
+    applyFixes(source, lint),
     "arr.map((x) => { return x + 1; });",
   );
 });
@@ -123,7 +123,7 @@ Deno.test("allows arrow function", () => {
 Deno.test("fixes function with rest and default params", () => {
   const source = "function f(a = 1, ...rest: number[]) { return a; }";
   assertEquals(
-    applyFixes(source, lint(source)),
+    applyFixes(source, lint),
     "const f = (a = 1, ...rest: number[]) => { return a; };",
   );
 });

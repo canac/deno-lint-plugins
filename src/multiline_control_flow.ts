@@ -31,10 +31,8 @@ const plugin: Deno.lint.Plugin = {
             node,
             message: "Control flow bodies must be on their own line",
             fix(fixer) {
-              return [
-                fixer.insertTextBefore(body, "{ "),
-                fixer.insertTextAfter(body, " }"),
-              ];
+              const text = context.sourceCode.getText(body);
+              return fixer.replaceText(body, `{ ${text} }`);
             },
           });
         }
