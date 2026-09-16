@@ -1,23 +1,26 @@
-// Deno lint plugin that prefers arrow functions over `function` declarations
-// and expressions. Auto-fixable.
-//
-// Disallowed:
-//   function add(a, b) { return a + b; }
-//   const greet = function (name) { return `hi, ${name}`; };
-//
-// Required:
-//   const add = (a, b) => { return a + b; };
-//   const greet = (name) => { return `hi, ${name}`; };
-//
-// The rule intentionally does not rewrite:
-//   - generators (`function*`)
-//   - class methods, object method shorthand, getters/setters
-//   - `export default function () {}` (would produce invalid syntax)
-
 type FunctionNode =
   | Deno.lint.FunctionDeclaration
   | Deno.lint.FunctionExpression;
 
+/**
+ * Deno lint plugin that prefers arrow functions over `function` declarations
+ * and expressions. Auto-fixable; parameters, type parameters and return types
+ * are sliced from the original source, so annotations and comments survive.
+ *
+ * Left alone: generators, class methods, object method shorthand, getters and
+ * setters, and `export default function () {}` — rewriting those would produce
+ * invalid syntax or change semantics.
+ *
+ * ```ts ignore
+ * // Disallowed
+ * function add(a, b) { return a + b; }
+ * const greet = function (name) { return `hi, ${name}`; };
+ *
+ * // Required
+ * const add = (a, b) => { return a + b; };
+ * const greet = (name) => { return `hi, ${name}`; };
+ * ```
+ */
 const plugin: Deno.lint.Plugin = {
   name: "style",
   rules: {

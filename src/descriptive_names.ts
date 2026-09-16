@@ -1,5 +1,20 @@
-// Deno lint plugin that disallows single-letter variable names.
-
+/**
+ * Deno lint plugin that disallows single-letter variable names.
+ *
+ * Covers variable declarators, function parameters — including destructured,
+ * rest, default and TypeScript parameter properties — and catch clause
+ * parameters. Not auto-fixable: only the author knows the intended name.
+ *
+ * ```ts ignore
+ * // Disallowed
+ * const n = Number(digits);
+ * for (const m of text.matchAll(pattern)) {}
+ *
+ * // Required
+ * const parsed = Number(digits);
+ * for (const match of text.matchAll(pattern)) {}
+ * ```
+ */
 const plugin: Deno.lint.Plugin = {
   name: "names",
   rules: {
